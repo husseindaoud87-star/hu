@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Menu Item</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0eae4;
+            background: #f0eae4 url("https://tse2.mm.bing.net/th?id=OIP.MfP5MS6LMHD7v9o46SkycgHaHa&pid=Api&P=0&h=220");
+            background-size: contain;
+        }
+
+        form {
+            max-width: 90%;
+            /* Change max-width to a percentage */
+            width: 400px;
+            /* Optional fixed width for larger screens */
+            margin: auto;
+            /* Center the form */
+            background: #d4cbcb;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(209, 12, 12, 0.1);
+            box-sizing: border-box;
+            /* Include padding and border in element's total width and height */
+        }
+
+        h1 {
+            text-align: center;
+            /* Center the heading */
+        }
+
+        input,
+        button {
+            width: 100%;
+            /* Full width for inputs and buttons */
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            /* Include padding and border in total width */
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 600px) {
+            form {
+                padding: 15px;
+                /* Adjust padding for smaller screens */
+            }
+
+            input,
+            button {
+                padding: 8px;
+                /* Smaller padding for inputs and buttons */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <form method="POST" action="add_item.php" enctype="multipart/form-data">
+        <h1>Add a New Menu Item</h1>
+        <input type="text" name="name" placeholder="Item Name" required>
+        <input type="text" name="price" placeholder="Item Price" required>
+
+        <label>
+            <input type="radio" name="upload_method" value="file" checked onclick="toggleInput()"> Upload from PC
+        </label>
+        <label>
+            <input type="radio" name="upload_method" value="url" onclick="toggleInput()"> Use Image URL
+        </label>
+
+        <div class="file-input">
+            <input type="file" name="image_file" accept="image/*">
+        </div>
+
+        <div class="url-input">
+            <input type="url" name="image_url" placeholder="Enter Image URL">
+        </div>
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    <script>
+        function toggleInput() {
+            const fileInput = document.querySelector('.file-input');
+            const urlInput = document.querySelector('.url-input');
+            const isFileUpload = document.querySelector('input[name="upload_method"]:checked').value === 'file';
+
+            fileInput.style.display = isFileUpload ? 'block' : 'none';
+            urlInput.style.display = isFileUpload ? 'none' : 'block';
+        }
+
+        // Initialize visibility on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleInput();
+        });
+    </script>
+
+</body>
+
+</html>
